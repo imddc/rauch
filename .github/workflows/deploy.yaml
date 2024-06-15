@@ -1,0 +1,72 @@
+name: 更新博客到服务器
+
+on:
+  push:
+    # push 代码的时候 哪个分支会受到影响 这里是 v1.0.0 分支
+    branches:
+      - main # 也可以设置为 main 分支
+
+# 推送之后执行一系列的任务
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 获取代码
+      - name: 迁出代码
+        # 使用action库 action/checkout获取代码
+        uses: actions/checkout@main
+      # 安装Node环境
+
+      - name: 安装node.js
+        # 使用action库  actions/setup-node安装node
+        uses: actions/setup-node@main
+        with:
+          node-version: lts/*
+
+      - name: 安装pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      # - name: get pnpm cache
+      #   id: pnpm-cache
+      #   shell: bash
+      #   run: |
+      #     echo "STORE_PATH=${pnpm store path}" >> $GITHUB_OUTPUT
+      #
+      # - name: Setup pnpm cache
+      #   uses: actions/cache@main
+      #   with:
+      #     path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+      #     key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pnpm-store-
+
+      # 安装依赖
+      - name: 安装依赖并打包
+        run: |
+          pnpm install
+          pnpm run build
+        env:
+          CI: true
+
+      - name: test
+        run: |
+          echo "build completed!"
+
+      # 部署到服务器
+      - name: deploy
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          # 私钥
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # 服务器ip
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # SCP参数
+          ARGS: '-avzr --delete'
+          # 源目录
+          SOURCE: '/dist/'
+          # 用户
+          REMOTE_USER: 'root'
