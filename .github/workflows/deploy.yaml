@@ -71,6 +71,6 @@ jobs:
           # 源目录
           SOURCE: 'dist/'
           # 目标目录
-          TARGET: '/root/www/'
+          TARGET: '/root/rauch/'
           # 排除
           EXCLUDE: '/node_modules/'
