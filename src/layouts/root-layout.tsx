@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
 
-const RootLayout = () => {
+function RootLayout() {
+  const [name, setName] = useState('John')
+
   return (
     <>
       <header className="flex gap-4 border-b border-slate-300 p-4">

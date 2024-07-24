@@ -1,8 +1,8 @@
 import {
+  Route,
+  RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
-  RouterProvider
 } from 'react-router-dom'
 import RootLayout from './layouts/root-layout'
 import IndexPage from './pages'
@@ -13,8 +13,8 @@ const router = createBrowserRouter(
     <Route element={<RootLayout />}>
       <Route path="/" element={<IndexPage />} />
       <Route path="/about" element={<AboutPage />} />
-    </Route>
-  )
+    </Route>,
+  ),
 )
 
 function App() {
