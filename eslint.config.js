@@ -5,6 +5,12 @@ export default antfu(
     react: true,
     typescript: true,
     jsx: true,
+    stylistic: {
+      indent: 2,
+      quotes: 'single',
+      jsx: true,
+      semi: false,
+    },
   },
   {
     ignores: [
@@ -19,9 +25,9 @@ export default antfu(
   // {
   //   rules: {
   //     // forwordRef必须传入ref
-  //     "react/ensure-forward-ref-using-ref": 'error',
+  //     'react/ensure-forward-ref-using-ref': 'error',
   //     // 禁止使用this.state  替换为回调函数的形式
-  //     "react/no-access-state-in-setstate": 'error',
+  //     'react/no-access-state-in-setstate': 'error',
   //     'react/no-array-index-key': 'warn',
   //     // 禁止使用children
   //     'react/no-children-count': 'error',
@@ -110,10 +116,10 @@ export default antfu(
   //     'react-hooks-extra/prefer-use-state-lazy-initialization': 'error',
   //
   //     'react-naming-convention/component-name': [
-  //       "warn",
-  //       { "rule": "PascalCase", "excepts": ["MyComponent"] }
-  //     ]
-  //   }
+  //       'warn',
+  //       { rule: 'PascalCase', excepts: ['MyComponent'] },
+  //     ],
+  //   },
   // },
   //
   {
