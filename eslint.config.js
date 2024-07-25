@@ -1,34 +1,22 @@
 import antfu from '@antfu/eslint-config'
-import tsParser from '@typescript-eslint/parser'
 
 export default antfu(
   {
     react: true,
     typescript: true,
     jsx: true,
-
-    stylistic: {
-      indent: 2,
-      quotes: 'single',
-      semi: false,
-    },
   },
   {
+    files: ['**/*.tsx?', '**/*.jsx?'],
     ignores: [
       'node_modules/',
       '**/node_modules/**/',
       'pnpm-lock.yaml',
       '**/pnpm-lock.yaml/**',
-      '.github/**',
-      '**/*.json',
     ],
   },
 
-  // react
   {
-    languageOptions: {
-      parser: tsParser,
-    },
     rules: {
       // forwordRef必须传入ref
       'react/ensure-forward-ref-using-ref': 'error',
@@ -125,11 +113,11 @@ export default antfu(
         'warn',
         { rule: 'PascalCase', excepts: ['MyComponent'] },
       ],
-    },
-  },
 
-  {
-    rules: {
+      // ts
+      '@typescript-eslint/array-type': 'error',
+
+      // simple
       'default-case': 'error',
       'no-unsafe-finally': 'error',
       'no-trailing-spaces': 'warn',
