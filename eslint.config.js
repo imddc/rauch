@@ -121,6 +121,8 @@ export default antfu(
       'default-case': 'error',
       'no-unsafe-finally': 'error',
       'no-trailing-spaces': 'warn',
+      // 关闭eslint-comments/no-unlimited-disable 不需要限制
+      'eslint-comments/no-unlimited-disable': 'off',
       'arrow-body-style': 'off',
       'prefer-arrow-callback': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
