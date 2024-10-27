@@ -1,4 +1,7 @@
 import antfu from '@antfu/eslint-config'
+import router from '@tanstack/eslint-plugin-router'
+import oxlint from 'eslint-plugin-oxlint'
+import tailwindcss from 'eslint-plugin-tailwindcss'
 
 export default antfu(
   {
@@ -15,7 +18,6 @@ export default antfu(
       '**/pnpm-lock.yaml/**',
     ],
   },
-
   {
     rules: {
       // forwordRef必须传入ref
@@ -80,6 +82,7 @@ export default antfu(
       // 使用速记写法
       'react/prefer-shorthand-boolean': 'error',
       'react/prefer-shorthand-fragment': 'error',
+
       // 禁止给void元素children
       'react-dom/no-children-in-void-dom-elements': 'error',
 
@@ -114,6 +117,19 @@ export default antfu(
         { rule: 'PascalCase', excepts: ['MyComponent'] },
       ],
 
+      // jsx
+      'style/jsx-sort-props': [
+        'error',
+        {
+          callbacksLast: true, // 将回调属性放在最后
+          shorthandFirst: true, // 将简写属性放在前面
+          noSortAlphabetically: false, // 按字母顺序排序
+          reservedFirst: true, // 将保留的属性放在前面
+          ignoreCase: true, // 忽略大小写
+          locale: 'auto', // 自动检测语言环境
+        },
+      ],
+
       // ts
       '@typescript-eslint/array-type': 'error',
 
@@ -139,4 +155,7 @@ export default antfu(
       }],
     },
   },
+  [...router.configs['flat/recommended']],
+  [...tailwindcss.configs['flat/recommended']],
+  { ...oxlint.configs['flat/recommended'] },
 )
